@@ -13,10 +13,10 @@ namespace Hepsiburada_Seller_Information.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class HepsiburadaSellerInformationEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public HepsiburadaSellerInformationEntities()
+            : base("name=HepsiburadaSellerInformationEntities")
         {
         }
     

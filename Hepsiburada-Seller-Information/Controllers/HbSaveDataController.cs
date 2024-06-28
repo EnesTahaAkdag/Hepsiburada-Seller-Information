@@ -1,21 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
+using System.Data.Entity;
+using System.Threading.Tasks;
+using Hepsiburada_Seller_Information.Models;
+using System.Text.RegularExpressions;
+
 
 namespace Hepsiburada_Seller_Information.Controllers
 {
     public class HbSaveDataController : Controller
     {
-        // GET: HbSaveData
-        public ActionResult Index(string StoreName)
+        HepsiburadaSellerInformationEntities db = new HepsiburadaSellerInformationEntities();
+
+        [HttpGet]
+        public ActionResult Index()
         {
             return View();
         }
-
-        public class Store
+        [HttpPost]
+        public ActionResult Index(StoreInfo model)
+        {
+            if (ModelState.IsValid)
+            {
+                string storeName = model.StoreName;
+                string formattedStoreName = storeName.Replace(" ", "-");
+                string links = "https://www.hepsiburada.com/magaza/" + formattedStoreName;
+                var models = new Seller_Information
+                {
+                    Link = links,
+                    StoreName = model.StoreName
+                };
+                db.Seller_Information.Add(models);
+                db.SaveChanges();
+                return Json(new { success = true, message = "Gelen Veri:" + models });
+            }
+            return Json(new { success = false, message = "Veri Gelmedi" });
+        }
+        public class StoreInfo
         {
             public string Link { get; set; }
             public string StoreName { get; set; }
@@ -30,9 +57,9 @@ namespace Hepsiburada_Seller_Information.Controllers
             public int NumberOfFollowers { get; set; }
             public int AverageDeliveryTime { get; set; }
             public int ResponseTime { get; set; }
-            public string RatingScore { get; set; } // Assuming rating score can have decimals
+            public string RatingScore { get; set; }
             public decimal NumberOfComments { get; set; }
-            public bool FastSeller { get; set; } // Assuming FastSeller is a boolean (true/false)
+            public bool FastSeller { get; set; }
             public int NumberOfProducts { get; set; }
             public string SellerName { get; set; }
         }
