@@ -10,6 +10,7 @@ using System.Data.Entity;
 using System.Threading.Tasks;
 using Hepsiburada_Seller_Information.Models;
 using System.Text.RegularExpressions;
+using System.Web.Management;
 
 
 namespace Hepsiburada_Seller_Information.Controllers
@@ -28,17 +29,22 @@ namespace Hepsiburada_Seller_Information.Controllers
         {
             if (ModelState.IsValid)
             {
-                string storeName = model.StoreName;
-                string formattedStoreName = storeName.Replace(" ", "-");
-                string links = "https://www.hepsiburada.com/magaza/" + formattedStoreName;
-                var models = new Seller_Information
+                var dataControl = db.Seller_Information.FirstOrDefault(m => m.StoreName == model.StoreName);
+                if (dataControl != null)
                 {
-                    Link = links,
-                    StoreName = model.StoreName
-                };
-                db.Seller_Information.Add(models);
-                db.SaveChanges();
-                return Json(new { success = true, message = "Gelen Veri:" + models });
+                    return Json(new { success = false, Message = "Mağza Zaten Var" });
+                }
+                else
+                {
+                    var models = new Seller_Information
+                    {
+                        Link = model.Link,
+                        StoreName = model.StoreName,
+                    };
+                    db.Seller_Information.Add(models);
+                    db.SaveChanges();
+                    return Json(new { success = true, message = "Gelen Veri:" + models });
+                }
             }
             return Json(new { success = false, message = "Veri Gelmedi" });
         }
