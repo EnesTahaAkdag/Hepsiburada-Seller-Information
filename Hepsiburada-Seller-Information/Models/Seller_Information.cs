@@ -33,5 +33,6 @@ namespace Hepsiburada_Seller_Information.Models
         public Nullable<bool> FastSaller { get; set; }
         public Nullable<int> NumberOfProducts { get; set; }
         public string SellerName { get; set; }
+        public string VKN { get; set; }
     }
 }

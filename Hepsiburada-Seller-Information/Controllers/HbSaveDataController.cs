@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 using Hepsiburada_Seller_Information.Models;
 using System.Text.RegularExpressions;
 using System.Web.Management;
-
+using HtmlAgilityPack;
+using Newtonsoft.Json;
 
 namespace Hepsiburada_Seller_Information.Controllers
 {
@@ -22,7 +23,8 @@ namespace Hepsiburada_Seller_Information.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+           var dataList = db.Seller_Information.ToList();
+            return View(dataList);
         }
         [HttpPost]
         public ActionResult Index(StoreInfo model)
@@ -48,8 +50,26 @@ namespace Hepsiburada_Seller_Information.Controllers
             }
             return Json(new { success = false, message = "Veri Gelmedi" });
         }
+        [HttpGet]
+        public JsonResult getUrl()
+        {
+            var randomUrl = db.Seller_Information
+                                .OrderBy(r => Guid.NewGuid()) 
+                                .Select(r => r.Link)
+                                .FirstOrDefault();
+            if (!string.IsNullOrEmpty(randomUrl))
+            {
+                return Json(new { success = true, url = randomUrl }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Rastgele URL bulunamadı." }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public class StoreInfo
         {
+            public int Id { get; set; }
             public string Link { get; set; }
             public string StoreName { get; set; }
             public string Telephone { get; set; }
@@ -68,6 +88,7 @@ namespace Hepsiburada_Seller_Information.Controllers
             public bool FastSeller { get; set; }
             public int NumberOfProducts { get; set; }
             public string SellerName { get; set; }
+            public string VKN { get; set; }
         }
 
     }

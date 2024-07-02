@@ -28,6 +28,7 @@
           <Property Name="FastSaller" Type="bit" />
           <Property Name="NumberOfProducts" Type="int" />
           <Property Name="SellerName" Type="nvarchar" MaxLength="255" />
+          <Property Name="VKN" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Seller_Information" EntityType="Self.Seller_Information" Schema="dbo" store:Type="Tables" />
@@ -62,6 +63,7 @@
           <Property Name="FastSaller" Type="Boolean" />
           <Property Name="NumberOfProducts" Type="Int32" />
           <Property Name="SellerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="VKN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -72,6 +74,7 @@
           <EntitySetMapping Name="Seller_Information">
             <EntityTypeMapping TypeName="Model.Seller_Information">
               <MappingFragment StoreEntitySet="Seller_Information">
+                <ScalarProperty Name="VKN" ColumnName="VKN" />
                 <ScalarProperty Name="SellerName" ColumnName="SellerName" />
                 <ScalarProperty Name="NumberOfProducts" ColumnName="NumberOfProducts" />
                 <ScalarProperty Name="FastSaller" ColumnName="FastSaller" />
