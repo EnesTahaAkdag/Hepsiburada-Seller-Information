@@ -16,7 +16,7 @@ namespace Hepsiburada_Seller_Information
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "HbSaveData", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "HbSaveData", action = "getUrl", id = UrlParameter.Optional }
             );
         }
     }

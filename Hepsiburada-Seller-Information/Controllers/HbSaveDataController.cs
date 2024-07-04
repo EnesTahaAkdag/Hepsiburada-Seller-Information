@@ -1,5 +1,6 @@
 ﻿using Hepsiburada_Seller_Information.Models;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Services.Description;
@@ -81,30 +82,32 @@ namespace Hepsiburada_Seller_Information.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var datacontrol = db.Seller_Information.FirstOrDefault(m => m.Link == model.Link);
+                var datacontrol = db.Seller_Information.FirstOrDefault(m => m.StoreName == model.StoreName);
                 if (datacontrol == null)
                 {
-                    return Json(new { success = false, message = "Böyle Bir Mağza Yok" });
+                    return Json(new { success = false, message = "Böyle Bir Mağaza Yok" });
                 }
                 else
                 {
                     datacontrol.StoreScore = model.StoreScore;
                     datacontrol.NumberOfFollowers = model.NumberOfFollowers;
                     datacontrol.NumberOfProducts = model.NumberOfProducts;
-                    datacontrol.RatingScore = Convert.ToDecimal(model.RatingScore);
-                    datacontrol.AverageDeliveryTime = Convert.ToString(model.AverageDeliveryTime);
-                    datacontrol.ResponseTime = Convert.ToString(model.ResponseTime);
-                    datacontrol.Email=model.Email;
-                    datacontrol.NumberOfRatings = model.NumberOfRating;
+                    datacontrol.RatingScore = model.RatingScore;
+                    datacontrol.AverageDeliveryTime = model.AverageDeliveryTime;
+                    datacontrol.ResponseTime = model.ResponseTime;
+                    datacontrol.Email = model.Email;
+                    datacontrol.NumberOfRatings = model.NumberOfRatings;
+                    datacontrol.NumberOfComments = model.NumberOfComments;
                 }
                 db.SaveChanges();
-                return Json(new { success = true, message = "Gelen Veri:" + datacontrol });
+                return Json(new { success = true, message = "Güncelleme Başarılı"});
             }
-            return Json(new { success = false, message = "Veriler Gelmedi" });
+            return Json(new { success = false, message = "Veriler Kaydedilmedi" });
+
         }
         public class StoreInfo
         {
-            public int Id { get; set; }
+            public long Id { get; set; }
             public string Link { get; set; }
             public string StoreName { get; set; }
             public string Telephone { get; set; }
@@ -114,12 +117,12 @@ namespace Hepsiburada_Seller_Information.Controllers
             public string Mersis { get; set; }
             public string Category { get; set; }
             public decimal StoreScore { get; set; }
-            public int NumberOfRating { get; set; }
+            public int NumberOfRatings { get; set; }
             public int NumberOfFollowers { get; set; }
-            public int AverageDeliveryTime { get; set; }
-            public int ResponseTime { get; set; }
-            public string RatingScore { get; set; }
-            public decimal NumberOfComments { get; set; }
+            public string AverageDeliveryTime { get; set; }
+            public string ResponseTime { get; set; }
+            public decimal RatingScore { get; set; }
+            public int NumberOfComments { get; set; }
             public int NumberOfProducts { get; set; }
             public string SellerName { get; set; }
             public string VKN { get; set; }
