@@ -1,61 +1,79 @@
 ﻿@model List<Hepsiburada_Seller_Information.Models.Seller_Information>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Hepsiburada Satıcı Bilgileri";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Hepsiburada Satıcı Bilgileri</h1>
+<div class="container mt-5">
+    <h1 class="text-center">Hepsiburada Satıcı Bilgileri</h1>
 
-<table class="table table-bordered" id="tblBilgiler">
-    <thead>
-        <tr style="text-align:center;">
-            <th style="vertical-align:middle;">Id</th>
-            <th style="vertical-align:middle;">Link</th>
-            <th style="vertical-align:middle;">Mağaza Adı</th>
-            <th style="vertical-align:middle;">Telefon</th>
-            <th style="vertical-align:middle;">Email</th>
-            <th style="vertical-align:middle;">Adres</th>
-            <th style="vertical-align:middle;">Fax</th>
-            <th style="vertical-align:middle;">Mersis</th>
-            <th style="vertical-align:middle;">Kategori</th>
-            <th style="vertical-align:middle;">Mağaza Skoru</th>
-            <th style="vertical-align:middle;">Derecelendirme Sayısı</th>
-            <th style="vertical-align:middle;">Takipçi Sayısı</th>
-            <th style="vertical-align:middle;">Ortalama Teslimat Süresi</th>
-            <th style="vertical-align:middle;">Yanıt Süresi</th>
-            <th style="vertical-align:middle;">Derecelendirme Puanı</th>
-            <th style="vertical-align:middle;">Yorum Sayısı</th>
-            <th style="vertical-align:middle;">Hızlı Satıcı</th>
-            <th style="vertical-align:middle;">Ürün Sayısı</th>
-            <th style="vertical-align:middle;">Satıcı İsmi</th>
-            <th style="vertical-align:middle;">VKN</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var infos in Model)
-        {
-            <tr style="text-align:center;">
-                <td style="vertical-align:middle;">@infos.ID</td>
-                <td style="vertical-align:middle;">@infos.Link</td>
-                <td style="vertical-align:middle;">@infos.StoreName</td>
-                <td style="vertical-align:middle;">@infos.Telephone</td>
-                <td style="vertical-align:middle;">@infos.Email</td>
-                <td style="vertical-align:middle;">@infos.Address</td>
-                <td style="vertical-align:middle;">@infos.Fax</td>
-                <td style="vertical-align:middle;">@infos.Mersis</td>
-                <td style="vertical-align:middle;">@infos.Category</td>
-                <td style="vertical-align:middle;">@infos.StoreScore</td>
-                <td style="vertical-align:middle;">@infos.NumberOfRatings</td>
-                <td style="vertical-align:middle;">@infos.NumberOfFollowers</td>
-                <td style="vertical-align:middle;">@infos.AverageDeliveryTime</td>
-                <td style="vertical-align:middle;">@infos.ResponseTime</td>
-                <td style="vertical-align:middle;">@infos.RatingScore</td>
-                <td style="vertical-align:middle;">@infos.NumberOfComments</td>
-                <td style="vertical-align:middle;">@infos.FastSaller</td>
-                <td style="vertical-align:middle;">@infos.NumberOfProducts</td>
-                <td style="vertical-align:middle;">@infos.SellerName</td>
-                <td style="vertical-align:middle;">@infos.VKN</td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" id="tblBilgiler">
+            <thead class="thead-dark">
+                <tr class="text-center">
+                    <th>Id</th>
+                    <th>Link</th>
+                    <th>Mağaza Adı</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+                    <th>Adres</th>
+                    <th>Fax</th>
+                    <th>Mersis</th>
+                    <th>Kategori</th>
+                    <th>Mağaza Skoru</th>
+                    <th>Derecelendirme Sayısı</th>
+                    <th>Takipçi Sayısı</th>
+                    <th>Ortalama Teslimat Süresi</th>
+                    <th>Yanıt Süresi</th>
+                    <th>Derecelendirme Puanı</th>
+                    <th>Yorum Sayısı</th>
+                    <th>Ürün Sayısı</th>
+                    <th>Satıcı İsmi</th>
+                    <th>VKN</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var infos in Model)
+                {
+                    <tr class="text-center">
+                        <td>@infos.ID</td>
+                        <td><a href="@infos.Link" target="_blank">@infos.Link</a></td>
+                        <td>@infos.StoreName</td>
+                        <td>@infos.Telephone</td>
+                        <td>@infos.Email</td>
+                        <td>@infos.Address</td>
+                        <td>@infos.Fax</td>
+                        <td>@infos.Mersis</td>
+                        <td>@infos.Category</td>
+                        <td>@infos.StoreScore</td>
+                        <td>@infos.NumberOfRatings</td>
+                        <td>@infos.NumberOfFollowers</td>
+                        <td>@infos.AverageDeliveryTime</td>
+                        <td>@infos.ResponseTime</td>
+                        <td>@infos.RatingScore</td>
+                        <td>@infos.NumberOfComments</td>
+                        <td>@infos.NumberOfProducts</td>
+                        <td>@infos.SellerName</td>
+                        <td>@infos.VKN</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#tblBilgiler').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true
+            });
+        });
+    </script>
+}

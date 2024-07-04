@@ -17,7 +17,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="500" />
           <Property Name="Fax" Type="varchar" MaxLength="20" />
           <Property Name="Mersis" Type="varchar" MaxLength="50" />
-          <Property Name="Category" Type="nvarchar" MaxLength="50" />
+          <Property Name="Category" Type="nvarchar" MaxLength="500" />
           <Property Name="StoreScore" Type="decimal" Precision="18" Scale="2" />
           <Property Name="NumberOfRatings" Type="int" />
           <Property Name="NumberOfFollowers" Type="int" />
@@ -25,7 +25,6 @@
           <Property Name="ResponseTime" Type="varchar" MaxLength="50" />
           <Property Name="RatingScore" Type="decimal" Precision="18" Scale="2" />
           <Property Name="NumberOfComments" Type="int" />
-          <Property Name="FastSaller" Type="bit" />
           <Property Name="NumberOfProducts" Type="int" />
           <Property Name="SellerName" Type="nvarchar" MaxLength="255" />
           <Property Name="VKN" Type="nchar" MaxLength="50" />
@@ -52,7 +51,7 @@
           <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Mersis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Category" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="StoreScore" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="NumberOfRatings" Type="Int32" />
           <Property Name="NumberOfFollowers" Type="Int32" />
@@ -60,7 +59,6 @@
           <Property Name="ResponseTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RatingScore" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="NumberOfComments" Type="Int32" />
-          <Property Name="FastSaller" Type="Boolean" />
           <Property Name="NumberOfProducts" Type="Int32" />
           <Property Name="SellerName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="VKN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
@@ -77,7 +75,6 @@
                 <ScalarProperty Name="VKN" ColumnName="VKN" />
                 <ScalarProperty Name="SellerName" ColumnName="SellerName" />
                 <ScalarProperty Name="NumberOfProducts" ColumnName="NumberOfProducts" />
-                <ScalarProperty Name="FastSaller" ColumnName="FastSaller" />
                 <ScalarProperty Name="NumberOfComments" ColumnName="NumberOfComments" />
                 <ScalarProperty Name="RatingScore" ColumnName="RatingScore" />
                 <ScalarProperty Name="ResponseTime" ColumnName="ResponseTime" />
