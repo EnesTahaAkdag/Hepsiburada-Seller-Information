@@ -47,13 +47,6 @@ namespace Hepsiburada_Seller_Information.Controllers
                                 .OrderBy(r => Guid.NewGuid())
                                 .Select(r => r.Link)
                                 .FirstOrDefault();
-            if (randomUrl == "https://www.hepsiburada.com/magaza")
-            {
-                randomUrl = db.Seller_Information
-                        .OrderBy(r => Guid.NewGuid())
-                        .Select(r => r.Link)
-                        .FirstOrDefault();
-            }
             if (!string.IsNullOrEmpty(randomUrl))
             {
                 return Json(new { success = true, url = randomUrl }, JsonRequestBehavior.AllowGet);
@@ -88,7 +81,7 @@ namespace Hepsiburada_Seller_Information.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var datacontrol = db.Seller_Information.FirstOrDefault(m => m.StoreName == model.StoreName);
+                var datacontrol = db.Seller_Information.FirstOrDefault(m => m.Link == model.Link);
                 if (datacontrol == null)
                 {
                     return Json(new { success = false, message = "Böyle Bir Mağza Yok" });
