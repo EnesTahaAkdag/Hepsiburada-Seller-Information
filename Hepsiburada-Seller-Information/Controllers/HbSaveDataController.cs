@@ -57,7 +57,22 @@ namespace Hepsiburada_Seller_Information.Controllers
                 return Json(new { success = false, message = "Rastgele URL bulunamadı." }, JsonRequestBehavior.AllowGet);
             }
         }
-
+        [HttpGet]
+        public JsonResult GetRandomUrls()
+        {
+            var randomUrl = db.Seller_Information
+                                .OrderBy(r => Guid.NewGuid())
+                                .Select(r => r.Link)
+                                .FirstOrDefault();
+            if (!string.IsNullOrEmpty(randomUrl))
+            {
+                return Json(new { success = true, url = randomUrl }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new { success = false, message = "Rastgele URL bulunamadı." }, JsonRequestBehavior.AllowGet);
+            }
+        }
         [HttpPost]
         public ActionResult UpdateCategory(StoreInfo model)
         {
@@ -109,6 +124,31 @@ namespace Hepsiburada_Seller_Information.Controllers
                 dataControl.RatingScore = model.RatingScore;
                 dataControl.NumberOfComments = model.NumberOfComments;
                 dataControl.NumberOfProducts = model.NumberOfProducts;
+                dataControl.VKN = model.VKN;
+                db.SaveChanges();
+                return Json(new { success = true, message = "Veri başarıyla güncellendi." });
+            }
+        }
+        [HttpPost]
+        public ActionResult UpData(StoreInfo model)
+        {
+            var dataControl = db.Seller_Information.FirstOrDefault(m => m.StoreName == model.StoreName);
+            if (dataControl == null)
+            {
+                return Json(new { success = false, message = "Böyle bir mağaza yok." });
+            }
+            else
+            {
+                dataControl.Email = model.Email;
+                dataControl.StoreScore = model.StoreScore;
+                dataControl.NumberOfRatings = model.NumberOfRatings;
+                dataControl.NumberOfFollowers = model.NumberOfFollowers;
+                dataControl.AverageDeliveryTime = model.AverageDeliveryTime;
+                dataControl.ResponseTime = model.ResponseTime;
+                dataControl.RatingScore = model.RatingScore;
+                dataControl.NumberOfComments = model.NumberOfComments;
+                dataControl.NumberOfProducts = model.NumberOfProducts;
+                dataControl.VKN = model.VKN;
                 db.SaveChanges();
                 return Json(new { success = true, message = "Veri başarıyla güncellendi." });
             }
