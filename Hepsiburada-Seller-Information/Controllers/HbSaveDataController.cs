@@ -139,23 +139,16 @@ namespace Hepsiburada_Seller_Information.Controllers
             }
             else
             {
-                dataControl.Email = model.Email;
-                dataControl.StoreScore = model.StoreScore;
-                dataControl.NumberOfRatings = model.NumberOfRatings;
-                dataControl.NumberOfFollowers = model.NumberOfFollowers;
-                dataControl.AverageDeliveryTime = model.AverageDeliveryTime;
-                dataControl.ResponseTime = model.ResponseTime;
-                dataControl.RatingScore = model.RatingScore;
-                dataControl.NumberOfComments = model.NumberOfComments;
-                dataControl.NumberOfProducts = model.NumberOfProducts;
-                dataControl.VKN = model.VKN;
+                dataControl.SellerName = model.Email;
+                dataControl.Telephone = model.Telephone;
+                dataControl.Address = model.Address;
+                dataControl.Fax= model.Fax;
+                dataControl.Mersis = model.Mersis;
                 db.SaveChanges();
                 return Json(new { success = true, message = "Veri başarıyla güncellendi." });
             }
         }
     }
-
-
     public class StoreInfo
     {
         public long Id { get; set; }
