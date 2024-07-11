@@ -139,7 +139,7 @@ namespace Hepsiburada_Seller_Information.Controllers
             }
             else
             {
-                dataControl.SellerName = model.Email;
+                dataControl.SellerName = model.SellerName;
                 dataControl.Telephone = model.Telephone;
                 dataControl.Address = model.Address;
                 dataControl.Fax= model.Fax;
