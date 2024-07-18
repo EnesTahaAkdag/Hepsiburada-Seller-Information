@@ -25,7 +25,7 @@
           <Property Name="ResponseTime" Type="varchar" MaxLength="50" />
           <Property Name="RatingScore" Type="decimal" Precision="18" Scale="2" />
           <Property Name="NumberOfComments" Type="int" />
-          <Property Name="NumberOfProducts" Type="int" />
+          <Property Name="NumberOfProducts" Type="nvarchar" MaxLength="50" />
           <Property Name="SellerName" Type="nvarchar" MaxLength="500" />
           <Property Name="VKN" Type="nchar" MaxLength="50" />
         </EntityType>
@@ -59,7 +59,7 @@
           <Property Name="ResponseTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RatingScore" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="NumberOfComments" Type="Int32" />
-          <Property Name="NumberOfProducts" Type="Int32" />
+          <Property Name="NumberOfProducts" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SellerName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="VKN" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>

@@ -30,7 +30,7 @@ namespace Hepsiburada_Seller_Information.Models
         public string ResponseTime { get; set; }
         public Nullable<decimal> RatingScore { get; set; }
         public Nullable<int> NumberOfComments { get; set; }
-        public Nullable<int> NumberOfProducts { get; set; }
+        public string NumberOfProducts { get; set; }
         public string SellerName { get; set; }
         public string VKN { get; set; }
     }

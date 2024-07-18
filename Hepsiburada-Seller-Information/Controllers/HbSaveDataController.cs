@@ -167,9 +167,8 @@ namespace Hepsiburada_Seller_Information.Controllers
         public string ResponseTime { get; set; }
         public decimal RatingScore { get; set; }
         public int NumberOfComments { get; set; }
-        public int NumberOfProducts { get; set; }
+        public string NumberOfProducts { get; set; }
         public string SellerName { get; set; }
         public string VKN { get; set; }
     }
-
 }
