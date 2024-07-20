@@ -13,33 +13,63 @@ namespace Hepsiburada_Seller_Information.Controllers
     {
         private HepsiburadaSellerInformationEntities db = new HepsiburadaSellerInformationEntities();
 
-        [HttpGet]
-        public ActionResult MarketPlaceData()
+        public ActionResult MarketPlaceData(int? page, int? pageSize)
         {
-            var data = (from c in db.Seller_Information
-                        select new SellerInformationViewModel()
-                        {
-                            Id = c.ID,
-                            Link = c.Link,
-                            StoreName = c.StoreName,
-                            Telephone = c.Telephone,
-                            Email = c.Email,
-                            Address = c.Address,
-                            Fax = c.Fax,
-                            Mersis = c.Mersis,
-                            Category = c.Category,
-                            StoreScore = c.StoreScore,
-                            NumberOfRatings = c.NumberOfRatings,
-                            NumberOfFollowers = c.NumberOfFollowers,
-                            AverageDeliveryTime = c.AverageDeliveryTime,
-                            ResponseTime = c.ResponseTime,
-                            RatingScore = c.RatingScore,
-                            NumberOfComments = c.NumberOfComments,
-                            NumberOfProducts = c.NumberOfProducts,
-                            SellerName = c.SellerName,
-                            VKN = c.VKN,
-                        })/*.Skip(0)*/.Take(10).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
+            try
+            {
+                int totalCount = db.Seller_Information.Count();
+                int currentPage = page ?? 1;
+                pageSize = pageSize ?? 240;
+                int totalPage = (int)Math.Ceiling((decimal)totalCount / pageSize.GetValueOrDefault());
+
+                var data = (from c in db.Seller_Information
+                            orderby c.ID
+                            select new SellerInformationViewModel
+                            {
+                                Id = c.ID,
+                                Link = c.Link,
+                                StoreName = c.StoreName,
+                                Telephone = c.Telephone,
+                                Email = c.Email,
+                                Address = c.Address,
+                                Fax = c.Fax,
+                                Mersis = c.Mersis,
+                                Category = c.Category,
+                                StoreScore = c.StoreScore,
+                                NumberOfRatings = c.NumberOfRatings,
+                                NumberOfFollowers = c.NumberOfFollowers,
+                                AverageDeliveryTime = c.AverageDeliveryTime,
+                                ResponseTime = c.ResponseTime,
+                                RatingScore = c.RatingScore,
+                                NumberOfComments = c.NumberOfComments,
+                                NumberOfProducts = c.NumberOfProducts,
+                                SellerName = c.SellerName,
+                                VKN = c.VKN,
+                            })
+                            .Skip((currentPage - 1) * pageSize.GetValueOrDefault())
+                            .Take(pageSize.GetValueOrDefault())
+                            .ToList();
+
+                return Json(new ApiResponse
+                {
+                    Success = true,
+                    ErrorMessage = null,
+                    Data = data,
+                    Page = currentPage,
+                    PageSize = pageSize.GetValueOrDefault(),
+                    TotalCount = totalCount,
+                    TotalPage = totalPage
+                }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new ApiResponse
+                {
+                    Success = false,
+                    ErrorMessage = ex.Message,
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
+
 }

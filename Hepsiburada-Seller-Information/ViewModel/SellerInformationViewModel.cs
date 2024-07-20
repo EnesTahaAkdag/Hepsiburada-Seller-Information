@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.SqlServer.Server;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -27,6 +28,15 @@ namespace Hepsiburada_Seller_Information.ViewModel
         public string NumberOfProducts { get; set; }
         public string SellerName { get; set; }
         public string VKN { get; set; }
-
+    }
+    public class ApiResponse
+    {
+        public bool Success { get; set; }
+        public string ErrorMessage { get; set; }
+        public object Data { get; set; }
+        public int Page { get; set; }
+        public int PageSize { get; set; }
+        public int TotalCount { get; set; }
+        public int TotalPage { get; set; }
     }
 }
